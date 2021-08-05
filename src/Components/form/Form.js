@@ -38,6 +38,8 @@ export default class Form extends Component {
             incorrectName ?
             alert("This person is already exist.") :
             alert("This phone is already exist.")
+
+            return
         }     
 
         this.props.addContact(name,number)
