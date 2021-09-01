@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import InputMask from 'react-input-mask';
 
+const _INITIAL_STATE_={
+    name:"",
+    number: "",
+}
+
 export default class Form extends Component {
 
     static propTypes={
@@ -13,12 +18,7 @@ export default class Form extends Component {
         })).isRequired,
     }
 
-    _INITIAL_STATE_={
-        name:"",
-        number: "",
-    }
-
-    state={...this._INITIAL_STATE_}
+    state={..._INITIAL_STATE_}
 
     handleChange=({target:{name,value}})=>{
         this.setState({[name]: value.trim()})
@@ -27,24 +27,19 @@ export default class Form extends Component {
     handleSubmit=(e)=>{
         e.preventDefault()  
 
-        let incorrectName = false
-
         const {name,number}=this.state
 
         if(this.props.contacts.some(i=>{
-            incorrectName = i.name.toLowerCase()===name.toLowerCase()
-            return i.number===number || incorrectName
+            return i.number===number || i.name.toLowerCase()===name.toLowerCase()
         })){
-            incorrectName ?
-            alert("This person is already exist.") :
-            alert("This phone is already exist.")
+            alert(`This ${name} is already exist.`)
 
             return
         }     
 
         this.props.addContact(name,number)
             
-        this.setState({...this._INITIAL_STATE_})
+        this.setState({..._INITIAL_STATE_})
     }
 
     render() {

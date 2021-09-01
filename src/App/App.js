@@ -7,12 +7,11 @@ import Filter from '../Components/filter/Filter';
 
 export class App extends Component {
 
-    _INITIAL_STATE_={
+
+    state={
         contacts: [],
         filter: ''
     }
-
-    state={...this._INITIAL_STATE_}
 
     addContact=(name,number)=>{        
         this.setState(prev=>{
